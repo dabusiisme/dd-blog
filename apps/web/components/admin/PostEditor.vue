@@ -50,46 +50,47 @@ function handleSubmit() {
 
 <template>
   <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
-    <label class="flex items-center gap-3 text-sm">
-      <span class="w-20 shrink-0 text-gray-500">Slug</span>
-      <input
+    <div class="flex items-center gap-3 text-sm">
+      <Label for="post-slug" class="w-20 shrink-0 text-muted-foreground">Slug</Label>
+      <Input
+        id="post-slug"
         v-model="slug"
         required
         placeholder="hello-world"
-        class="flex-1 rounded border px-3 py-2"
         :disabled="!!initialSlug"
+        class="flex-1"
       />
-    </label>
-    <label class="flex items-center gap-3 text-sm">
-      <span class="w-20 shrink-0 text-gray-500">标题</span>
-      <input v-model="title" required class="flex-1 rounded border px-3 py-2" />
-    </label>
-    <label class="flex items-center gap-3 text-sm">
-      <span class="w-20 shrink-0 text-gray-500">摘要</span>
-      <input v-model="description" class="flex-1 rounded border px-3 py-2" />
-    </label>
-    <div class="flex gap-4 text-sm">
-      <label class="flex items-center gap-3">
-        <span class="w-20 shrink-0 text-gray-500">发布日期</span>
-        <input v-model="publishedAt" type="date" required class="rounded border px-3 py-2" />
-      </label>
-      <label class="flex items-center gap-3">
-        <span class="w-20 shrink-0 text-gray-500">标签</span>
-        <input v-model="tags" placeholder="逗号分隔" class="flex-1 rounded border px-3 py-2" />
-      </label>
     </div>
-    <label class="flex items-center gap-2 text-sm">
-      <input v-model="draft" type="checkbox" />
-      <span>保存为草稿（前台不可见）</span>
-    </label>
-    <textarea
+    <div class="flex items-center gap-3 text-sm">
+      <Label for="post-title" class="w-20 shrink-0 text-muted-foreground">标题</Label>
+      <Input id="post-title" v-model="title" required class="flex-1" />
+    </div>
+    <div class="flex items-center gap-3 text-sm">
+      <Label for="post-desc" class="w-20 shrink-0 text-muted-foreground">摘要</Label>
+      <Input id="post-desc" v-model="description" class="flex-1" />
+    </div>
+    <div class="flex gap-4 text-sm">
+      <div class="flex items-center gap-3">
+        <Label for="post-date" class="w-20 shrink-0 text-muted-foreground">发布日期</Label>
+        <Input id="post-date" v-model="publishedAt" type="date" required />
+      </div>
+      <div class="flex flex-1 items-center gap-3">
+        <Label for="post-tags" class="w-20 shrink-0 text-muted-foreground">标签</Label>
+        <Input id="post-tags" v-model="tags" placeholder="逗号分隔" class="flex-1" />
+      </div>
+    </div>
+    <div class="flex items-center gap-2 text-sm">
+      <input id="post-draft" v-model="draft" type="checkbox" class="h-4 w-4 rounded border-input" />
+      <Label for="post-draft">保存为草稿（前台不可见）</Label>
+    </div>
+    <Textarea
       v-model="body"
-      rows="18"
+      :rows="18"
       placeholder="Markdown 正文"
-      class="rounded border px-3 py-2 font-mono text-sm"
+      class="font-mono"
     />
     <div>
-      <BaseButton type="submit" :disabled="submitting">{{ submitLabel }}</BaseButton>
+      <Button type="submit" :disabled="submitting">{{ submitLabel }}</Button>
     </div>
   </form>
 </template>

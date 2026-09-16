@@ -37,18 +37,18 @@ async function handleSubmit() {
   <div class="max-w-lg">
     <h1 class="mb-6 text-2xl font-bold">站点设置</h1>
     <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
-      <label class="flex flex-col gap-1 text-sm">
+      <Label class="flex flex-col gap-1">
         站点名称
-        <input v-model="form.siteName" required class="rounded border px-3 py-2" />
-      </label>
-      <label class="flex flex-col gap-1 text-sm">
+        <Input v-model="form.siteName" required />
+      </Label>
+      <Label class="flex flex-col gap-1">
         站点描述
-        <textarea v-model="form.description" rows="3" class="rounded border px-3 py-2" />
-      </label>
+        <Textarea v-model="form.description" :rows="3" />
+      </Label>
       <p v-if="message" class="text-sm text-green-600">{{ message }}</p>
-      <p v-if="error" class="text-sm text-red-500">{{ error }}</p>
+      <p v-if="error" class="text-sm text-destructive">{{ error }}</p>
       <div>
-        <BaseButton type="submit">保存</BaseButton>
+        <Button type="submit">保存</Button>
       </div>
     </form>
   </div>

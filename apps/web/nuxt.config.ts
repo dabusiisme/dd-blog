@@ -2,12 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-15',
 
-  modules: ['@nuxt/content', '@pinia/nuxt', '@unocss/nuxt'],
+  modules: ['@nuxt/content', '@pinia/nuxt', '@nuxtjs/tailwindcss'],
 
   // 组件自动导入不使用目录前缀：components/blog/PostCard.vue → <PostCard />
-  components: [{ path: '~/components', pathPrefix: false }],
+  // 仅扫描 .vue；shadcn-vue 的 index.ts 用于 Vite import，不应被 Nuxt 当成组件
+  components: [{ path: '~/components', pathPrefix: false, extensions: ['vue'] }],
 
-  css: ['uno.css', '~/assets/css/main.css'],
+  css: ['~/assets/css/tailwind.css', '~/assets/css/main.css'],
 
   typescript: {
     strict: true,

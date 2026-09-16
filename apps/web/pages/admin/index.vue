@@ -17,14 +17,16 @@ const tagCount = computed(
     <div class="mb-6 flex items-center justify-between">
       <h1 class="text-2xl font-bold">仪表盘</h1>
       <div class="flex items-center gap-3">
-        <NuxtLink to="/admin/posts" class="rounded border px-4 py-2 text-sm hover:bg-gray-100">
-          文章管理
-        </NuxtLink>
-        <BaseButton to="/admin/posts/new">新建文章</BaseButton>
+        <Button variant="outline" as-child>
+          <NuxtLink to="/admin/posts">文章管理</NuxtLink>
+        </Button>
+        <Button as-child>
+          <NuxtLink to="/admin/posts/new">新建文章</NuxtLink>
+        </Button>
       </div>
     </div>
 
-    <p v-if="error" class="mb-4 text-sm text-red-500">文章数据加载失败：{{ error.message }}</p>
+    <p v-if="error" class="mb-4 text-sm text-destructive">文章数据加载失败：{{ error.message }}</p>
 
     <div class="grid grid-cols-3 gap-4">
       <DashboardCard label="已发布" :value="pending ? '…' : publishedCount" />

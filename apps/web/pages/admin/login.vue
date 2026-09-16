@@ -23,25 +23,22 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <form class="w-80 rounded-lg border bg-white p-8 shadow" @submit.prevent="handleSubmit">
+  <form
+    class="w-80 rounded-lg border bg-card p-8 text-card-foreground shadow-sm"
+    @submit.prevent="handleSubmit"
+  >
     <h1 class="mb-6 text-center text-xl font-bold">后台登录</h1>
-    <label class="mb-4 flex flex-col gap-1 text-sm">
+    <Label class="mb-4 flex flex-col gap-1">
       用户名
-      <input v-model="form.username" required autocomplete="username" class="rounded border px-3 py-2" />
-    </label>
-    <label class="mb-6 flex flex-col gap-1 text-sm">
+      <Input v-model="form.username" required autocomplete="username" />
+    </Label>
+    <Label class="mb-6 flex flex-col gap-1">
       密码
-      <input
-        v-model="form.password"
-        type="password"
-        required
-        autocomplete="current-password"
-        class="rounded border px-3 py-2"
-      />
-    </label>
-    <p v-if="error" class="mb-4 text-sm text-red-500">{{ error }}</p>
-    <BaseButton type="submit" :disabled="loading" class="w-full">
+      <Input v-model="form.password" type="password" required autocomplete="current-password" />
+    </Label>
+    <p v-if="error" class="mb-4 text-sm text-destructive">{{ error }}</p>
+    <Button type="submit" :disabled="loading" class="w-full">
       {{ loading ? '登录中…' : '登录' }}
-    </BaseButton>
+    </Button>
   </form>
 </template>
