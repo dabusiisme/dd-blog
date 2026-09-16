@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { PostFrontmatter } from '~/types/post'
 
+definePageMeta({ layout: 'admin' })
+
 const route = useRoute()
 const slug = decodeURIComponent(route.params.id as string)
 

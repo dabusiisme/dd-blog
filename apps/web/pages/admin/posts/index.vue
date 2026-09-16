@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'admin' })
+
 const { listPosts, deletePost } = usePosts()
 
 const {
@@ -25,9 +27,7 @@ async function handleDelete(slug: string) {
   <div>
     <div class="mb-6 flex items-center justify-between">
       <h1 class="text-2xl font-bold">文章</h1>
-      <NuxtLink to="/admin/posts/new">
-        <BaseButton>新建文章</BaseButton>
-      </NuxtLink>
+      <BaseButton to="/admin/posts/new">新建文章</BaseButton>
     </div>
 
     <p v-if="error" class="mb-4 text-sm text-red-500">{{ error }}</p>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'admin' })
+
 const { createPost } = usePosts()
 const error = ref('')
 const saving = ref(false)

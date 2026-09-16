@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'admin' })
+
 const { saveSiteConfig } = useSiteConfig()
 
 const form = reactive({

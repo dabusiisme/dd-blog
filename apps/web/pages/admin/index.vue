@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'admin' })
+
 const { listPosts } = usePosts()
 
 const { data: posts, pending, error } = await useAsyncData('admin-posts', () => listPosts())
@@ -14,9 +16,12 @@ const tagCount = computed(
   <div>
     <div class="mb-6 flex items-center justify-between">
       <h1 class="text-2xl font-bold">仪表盘</h1>
-      <NuxtLink to="/admin/posts/new">
-        <BaseButton>新建文章</BaseButton>
-      </NuxtLink>
+      <div class="flex items-center gap-3">
+        <NuxtLink to="/admin/posts" class="rounded border px-4 py-2 text-sm hover:bg-gray-100">
+          文章管理
+        </NuxtLink>
+        <BaseButton to="/admin/posts/new">新建文章</BaseButton>
+      </div>
     </div>
 
     <p v-if="error" class="mb-4 text-sm text-red-500">文章数据加载失败：{{ error.message }}</p>
