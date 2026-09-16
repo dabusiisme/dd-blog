@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.output/
+.nuxt/
+.data/
+.cache/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# Editor
+.DS_Store
+.idea/
+
+# Test coverage
+coverage/
+
+# Cloudflare
+.wrangler/
+
+# AI 助手协作数据（本地规划/会话记录，不入库）
+.codebuddy/

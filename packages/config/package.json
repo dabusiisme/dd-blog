@@ -1,0 +1,15 @@
+{
+  "name": "@blog/config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "eslint",
+    "tsconfig.base.json"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.11.0",
+    "eslint": "^9.11.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "typescript-eslint": "^8.7.0"
+  }
+}

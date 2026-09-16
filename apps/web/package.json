@@ -1,0 +1,28 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "type-check": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@blog/shared": "workspace:*",
+    "@nuxt/content": "^2.13.4",
+    "@pinia/nuxt": "^0.5.5",
+    "pinia": "^2.2.2"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^66.0.0",
+    "nuxt": "^3.14.0",
+    "typescript": "^5.6.2",
+    "unocss": "^66.0.0",
+    "vue": "^3.5.10",
+    "vue-tsc": "^2.1.6"
+  }
+}
