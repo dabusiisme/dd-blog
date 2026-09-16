@@ -1,7 +1,7 @@
 import { apiFailure, apiSuccess } from '../../../../types/api'
 import type { PostFrontmatter } from '../../../../types/post'
 import { readFile, writeFile } from '../../../utils/github'
-import { serializePost } from '../../../utils/markdown'
+import { postRepoPathById, serializePost } from '../../../utils/markdown'
 
 /** 更新文章：以仓库当前 sha 做乐观锁覆盖提交 */
 export default defineEventHandler(async (event) => {
@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     return apiFailure('BAD_REQUEST', 'frontmatter.title 为必填项')
   }
 
-  const repoPath = `content/posts/${id}.md`
+  const repoPath = postRepoPathById(id)
   const existing = await readFile(repoPath).catch(() => null)
   if (!existing) {
     throw createError({ statusCode: 404, statusMessage: '文章不存在' })

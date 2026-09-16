@@ -8,8 +8,9 @@ const { updatePost } = usePosts()
 const error = ref('')
 const saving = ref(false)
 
+const requestFetch = useRequestFetch()
 const { data: post, pending } = await useAsyncData(`admin-post-${slug}`, () =>
-  $fetch<{ data: { slug: string; frontmatter: PostFrontmatter; body: string } }>(
+  requestFetch<{ data: { slug: string; frontmatter: PostFrontmatter; body: string } }>(
     `/api/admin/posts/${encodeURIComponent(slug)}`,
   ),
 )

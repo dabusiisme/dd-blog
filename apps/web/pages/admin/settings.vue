@@ -9,8 +9,9 @@ const message = ref('')
 const error = ref('')
 
 // TODO: 从 content/site.config.json（Git API）加载现有配置
+const requestFetch = useRequestFetch()
 const { data: config } = await useAsyncData('admin-config', () =>
-  $fetch<{ data: Record<string, unknown> }>('/api/admin/config').catch(() => null),
+  requestFetch<{ data: Record<string, unknown> }>('/api/admin/config').catch(() => null),
 )
 
 if (config.value?.data) {

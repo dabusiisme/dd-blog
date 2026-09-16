@@ -1,4 +1,5 @@
 import { apiSuccess } from '../../../../types/api'
+import { SITE_CONFIG_PATH } from '../../../../utils/constants'
 import { readFile, writeFile } from '../../../utils/github'
 
 /** 保存站点配置（提交到 Git，构建部署后生效） */
@@ -8,11 +9,11 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: '请求体必须为 JSON 对象' })
   }
 
-  const existing = await readFile('content/site.config.json').catch(() => null)
+  const existing = await readFile(SITE_CONFIG_PATH).catch(() => null)
   const content = `${JSON.stringify(body, null, 2)}\n`
 
   await writeFile(
-    'content/site.config.json',
+    SITE_CONFIG_PATH,
     content,
     'chore(config): update site config',
     existing?.sha,

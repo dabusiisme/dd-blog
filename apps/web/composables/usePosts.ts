@@ -9,27 +9,30 @@ export interface AdminPost {
 }
 
 export function usePosts() {
+  // SSR 时内部请求默认不携带 Cookie，需用 useRequestFetch 透传会话（否则后台页面硬刷新会 401）
+  const requestFetch = useRequestFetch()
+
   async function listPosts(): Promise<AdminPost[]> {
-    const res = await $fetch<{ data: AdminPost[] }>('/api/admin/posts')
+    const res = await requestFetch<{ data: AdminPost[] }>('/api/admin/posts')
     return res.data
   }
 
   async function createPost(slug: string, frontmatter: PostFrontmatter, body: string) {
-    return $fetch('/api/admin/posts', {
+    return requestFetch('/api/admin/posts', {
       method: 'POST',
       body: { slug, frontmatter, body },
     })
   }
 
   async function updatePost(slug: string, frontmatter: PostFrontmatter, body: string) {
-    return $fetch(`/api/admin/posts/${encodeURIComponent(slug)}`, {
+    return requestFetch(`/api/admin/posts/${encodeURIComponent(slug)}`, {
       method: 'PUT',
       body: { frontmatter, body },
     })
   }
 
   async function deletePost(slug: string) {
-    return $fetch(`/api/admin/posts/${encodeURIComponent(slug)}`, { method: 'DELETE' })
+    return requestFetch(`/api/admin/posts/${encodeURIComponent(slug)}`, { method: 'DELETE' })
   }
 
   return { listPosts, createPost, updatePost, deletePost }

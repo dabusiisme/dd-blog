@@ -1,4 +1,5 @@
 import type { PostFrontmatter } from '../../types/post'
+import { CONTENT_POSTS_DIR } from '../../utils/constants'
 
 /**
  * Frontmatter 解析 / 序列化（仅支持本项目使用的 YAML 子集：
@@ -45,14 +46,21 @@ export function serializePost(frontmatter: PostFrontmatter, body: string): strin
   return `${lines.join('\n')}\n${body}`
 }
 
-/** 由发布日期推导文章在仓库中的路径：content/posts/YYYY/MM/<slug>.md */
+/** 由发布日期推导文章在仓库中的路径：apps/web/content/posts/YYYY/MM/<slug>.md */
 export function postRepoPath(slug: string, publishedAt: string): string {
   const [, year, month] = /^(\d{4})-(\d{2})/.exec(publishedAt) ?? []
   const datePart = year && month ? `${year}/${month}` : new Date().toISOString().slice(0, 7).replace('-', '/')
-  return `content/posts/${datePart}/${slug.replace(/\.md$/, '')}.md`
+  return `${CONTENT_POSTS_DIR}/${datePart}/${slug.replace(/\.md$/, '')}.md`
 }
 
-/** 仓库文件路径 → slug（content/posts/ 前缀与 .md 后缀去掉） */
+/** 文章 id（相对 content/posts 的路径，如 2026/09/hello-world）→ 仓库文件路径 */
+export function postRepoPathById(id: string): string {
+  return `${CONTENT_POSTS_DIR}/${id.replace(/\.md$/, '')}.md`
+}
+
+/** 仓库文件路径 → slug（CONTENT_POSTS_DIR 前缀与 .md 后缀去掉） */
 export function repoPathToSlug(repoPath: string): string {
-  return repoPath.replace(/^content\/posts\//, '').replace(/\.md$/, '')
+  const prefix = `${CONTENT_POSTS_DIR}/`
+  const relative = repoPath.startsWith(prefix) ? repoPath.slice(prefix.length) : repoPath
+  return relative.replace(/\.md$/, '')
 }
